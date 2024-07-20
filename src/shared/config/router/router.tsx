@@ -2,7 +2,9 @@ import React from 'react';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
 import { Routes } from './routes';
 
-import { HomePage, LoginPage, RegisterPage } from '@/pages';
+import { LoginPage } from '@/pages/auth/login-page';
+import { RegisterPage } from '@/pages/auth/register-page';
+import { HomePage } from '@/pages/home-page';
 
 const authorizedRoutes: RouteObject[] = [
   {
