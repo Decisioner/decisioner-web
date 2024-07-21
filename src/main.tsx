@@ -6,6 +6,8 @@ import { ThemeProvider } from '@mui/material';
 import theme from '@/shared/config/theme';
 import { router } from '@/shared/config/router';
 
+import '@/shared/config/theme/styles';
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
