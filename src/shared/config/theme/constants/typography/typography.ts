@@ -1,6 +1,7 @@
 import { TypographyOptions } from '@mui/material/styles/createTypography';
 
 const typography: TypographyOptions = {
+  fontFamily: 'Open Sans, Nunito, sans-serif',
   h1: {
     fontFamily: 'Nunito',
     fontWeight: 600,
