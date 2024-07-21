@@ -30,7 +30,7 @@ const UnauthenticatedLayout = ({
             </Typography>
           )}
         </Box>
-        {children}
+        <Box sx={styles.formContainer(isMobile)}>{children}</Box>
       </Grid>
     </Grid>
   );

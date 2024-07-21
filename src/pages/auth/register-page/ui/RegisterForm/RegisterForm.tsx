@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { Box, Theme, Typography, useMediaQuery } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { Button, TextField } from '@/shared/ui';
 
 import {
@@ -16,10 +16,6 @@ import { Routes } from '@/core/router';
 import * as styles from './RegisterForm.styles';
 
 const RegisterForm = () => {
-  const isMobile = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down('sm')
-  );
-
   const registerForm = useForm<RegisterRequest>({
     defaultValues: registerFormDefaultValues,
     resolver: zodResolver(RegisterRequestSchema),
@@ -30,12 +26,7 @@ const RegisterForm = () => {
   });
 
   return (
-    <Box
-      component="form"
-      noValidate
-      sx={styles.form(isMobile)}
-      onSubmit={handleSubmit}
-    >
+    <Box component="form" noValidate sx={styles.form} onSubmit={handleSubmit}>
       <Controller
         name="username"
         control={registerForm.control}
