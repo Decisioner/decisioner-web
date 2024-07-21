@@ -10,7 +10,10 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { TextFieldProps } from './TextField.props';
 import * as styles from './TextField.styles';
 
-const TextField = ({ type, ...props }: TextFieldProps) => {
+const TextField = (
+  { type, ...props }: TextFieldProps,
+  ref: React.Ref<HTMLDivElement>
+) => {
   const [isVisible, setIsVisible] = useState(false);
 
   return (
@@ -33,8 +36,10 @@ const TextField = ({ type, ...props }: TextFieldProps) => {
             props.InputProps?.endAdornment
           ),
       }}
+      ref={ref}
     />
   );
 };
 
-export default TextField;
+const ForwardedTextField = React.forwardRef(TextField);
+export default ForwardedTextField;
