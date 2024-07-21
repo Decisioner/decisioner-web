@@ -28,6 +28,8 @@ const palette: PaletteOptions = {
   },
   red: {
     main: '#E12626',
+    200: '#CA1C1C',
+    400: '#F6BCBC',
   },
   green: {
     main: '#00C792',
