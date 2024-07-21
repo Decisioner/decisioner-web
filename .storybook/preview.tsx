@@ -2,9 +2,9 @@ import type { Preview, StoryFn } from '@storybook/react';
 
 import React from 'react';
 import { ThemeProvider } from '@mui/material';
-import theme from '../src/shared/config/theme';
+import theme from '../src/core/config/theme';
 
-import '../src/shared/config/theme/styles';
+import '../src/core/config/theme/styles';
 
 const preview: Preview = {
   parameters: {

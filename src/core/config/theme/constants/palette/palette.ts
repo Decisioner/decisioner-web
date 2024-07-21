@@ -12,6 +12,7 @@ const palette: PaletteOptions = {
     700: '#E5E5E5',
     800: '#FAFAFA',
     main: '#666666',
+    light: '#F5F8FB',
   },
   white: {
     main: '#FFFFFF',
