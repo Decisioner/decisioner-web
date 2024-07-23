@@ -9,6 +9,12 @@ const HomePage = lazy(() =>
   import('@/pages/home-page').then((module) => ({ default: module.HomePage }))
 );
 
+const SavedPage = lazy(() =>
+  import('@/pages/saved-page').then((module) => ({
+    default: module.SavedPage,
+  }))
+);
+
 const LoginPage = lazy(() =>
   import('@/pages/login-page').then((module) => ({ default: module.LoginPage }))
 );
@@ -25,6 +31,18 @@ const authorizedRoutes: RouteObject[] = [
       {
         path: Routes.HOME,
         element: <HomePage />,
+      },
+      {
+        path: Routes.MY_POLLS,
+        element: <div>My polls</div>,
+      },
+      {
+        path: Routes.SAVED,
+        element: <SavedPage />,
+      },
+      {
+        path: Routes.PROFILE,
+        element: <div>Profile</div>,
       },
     ].map((route) => ({
       ...route,
