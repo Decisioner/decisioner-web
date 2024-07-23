@@ -1,19 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, DefaultValues, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Box, Typography } from '@mui/material';
 import { Button, TextField } from '@/shared/ui';
 
-import {
-  RegisterRequest,
-  RegisterRequestSchema,
-  registerFormDefaultValues,
-} from '../../models';
+import { RegisterRequest, RegisterRequestSchema } from '@/core/api/auth';
 import { Routes } from '@/core/router';
 
 import * as styles from './RegisterForm.styles';
+
+const registerFormDefaultValues: DefaultValues<RegisterRequest> = {
+  username: '',
+  email: '',
+  fullName: '',
+  password: '',
+};
 
 const RegisterForm = () => {
   const registerForm = useForm<RegisterRequest>({
