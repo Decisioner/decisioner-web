@@ -1,6 +1,9 @@
 import { ButtonProps as MUIButtonProps } from '@mui/material';
 
-export type ButtonProps = Pick<MUIButtonProps, 'variant' | 'type'> & {
+export type ButtonProps = Pick<
+  MUIButtonProps,
+  'variant' | 'type' | 'onClick' | 'disabled'
+> & {
   color?: ButtonColor;
   children: React.ReactNode;
 };

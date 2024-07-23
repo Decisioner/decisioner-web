@@ -7,12 +7,14 @@ const Button = ({
   variant = 'contained',
   color = ButtonColor.PRIMARY,
   children,
+  ...props
 }: ButtonProps) => {
   return (
     <MUIButton
       variant={variant}
       sx={styles.button(color, variant)}
       disableElevation
+      {...props}
     >
       {children}
     </MUIButton>
