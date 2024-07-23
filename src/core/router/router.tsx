@@ -26,7 +26,10 @@ const authorizedRoutes: RouteObject[] = [
         path: Routes.HOME,
         element: <HomePage />,
       },
-    ],
+    ].map((route) => ({
+      ...route,
+      element: <LazyLoadingWrap>{route.element}</LazyLoadingWrap>,
+    })),
   },
 ];
 
@@ -42,18 +45,14 @@ const unauthorizedRoutes: RouteObject[] = [
         path: Routes.REGISTER,
         element: <RegisterPage />,
       },
-    ],
+    ].map((route) => ({
+      ...route,
+      element: <LazyLoadingWrap>{route.element}</LazyLoadingWrap>,
+    })),
   },
 ];
 
-export const router = createBrowserRouter(
-  ([] as RouteObject[]).concat(
-    ...[...authorizedRoutes, ...unauthorizedRoutes].map(
-      (route) =>
-        route.children?.map((childrenRoute) => ({
-          ...childrenRoute,
-          element: <LazyLoadingWrap>{childrenRoute.element}</LazyLoadingWrap>,
-        })) || []
-    )
-  )
-);
+export const router = createBrowserRouter([
+  ...authorizedRoutes,
+  ...unauthorizedRoutes,
+]);
