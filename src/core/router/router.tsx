@@ -2,8 +2,8 @@ import React from 'react';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
 import { Routes } from './routes';
 
-import { LoginPage } from '@/pages/auth/login-page';
-import { RegisterPage } from '@/pages/auth/register-page';
+import { LoginPage } from '@/pages/login-page';
+import { RegisterPage } from '@/pages/register-page';
 import { HomePage } from '@/pages/home-page';
 import { AuthenticatedGuard, UnauthenticatedGuard } from './guards';
 

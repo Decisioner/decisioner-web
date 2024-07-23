@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { User } from '@/core/models';
 import { StorageUtil } from '@/shared/utils';
 import { AuthContextProps } from '../types';
-import { AuthService } from '@/pages/auth/api';
+import { AuthService } from '@/core/api/auth';
 
 const AuthContext = React.createContext<AuthContextProps>({
   update: () => new Promise(() => {}),
