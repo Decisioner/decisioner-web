@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
-import { Routes } from './routes';
 
-import { LoginPage } from '@/pages/login-page';
-import { RegisterPage } from '@/pages/register-page';
-import { HomePage } from '@/pages/home-page';
+import { Routes } from './routes';
 import { AuthenticatedGuard, UnauthenticatedGuard } from './guards';
+import LazyLoadingWrap from '@/shared/ui/LazyLoadingWrapper';
+
+const HomePage = lazy(() =>
+  import('@/pages/home-page').then((module) => ({ default: module.HomePage }))
+);
+
+const LoginPage = lazy(() =>
+  import('@/pages/login-page').then((module) => ({ default: module.LoginPage }))
+);
+const RegisterPage = lazy(() =>
+  import('@/pages/register-page').then((module) => ({
+    default: module.RegisterPage,
+  }))
+);
 
 const authorizedRoutes: RouteObject[] = [
   {
@@ -35,7 +46,14 @@ const unauthorizedRoutes: RouteObject[] = [
   },
 ];
 
-export const router = createBrowserRouter([
-  ...authorizedRoutes,
-  ...unauthorizedRoutes,
-]);
+export const router = createBrowserRouter(
+  ([] as RouteObject[]).concat(
+    ...[...authorizedRoutes, ...unauthorizedRoutes].map(
+      (route) =>
+        route.children?.map((childrenRoute) => ({
+          ...childrenRoute,
+          element: <LazyLoadingWrap>{childrenRoute.element}</LazyLoadingWrap>,
+        })) || []
+    )
+  )
+);
