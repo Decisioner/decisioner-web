@@ -11,6 +11,7 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:prettier/recommended',
     'prettier',
+    'plugin:storybook/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs', 'vite.config.ts'],
   parser: '@typescript-eslint/parser',
@@ -49,6 +50,7 @@ module.exports = {
         caughtErrorsIgnorePattern: '^_',
       },
     ],
+    'react-refresh/only-export-components': 'off',
   },
   parserOptions: {
     ecmaVersion: 'latest',
