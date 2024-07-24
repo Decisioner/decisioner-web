@@ -1,50 +1,14 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
 
-import { Routes } from './routes';
 import { AuthenticatedGuard, UnauthenticatedGuard } from './guards';
 import LazyLoadingWrap from '@/shared/ui/LazyLoadingWrapper';
-
-const HomePage = lazy(() =>
-  import('@/pages/home-page').then((module) => ({ default: module.HomePage }))
-);
-
-const SavedPage = lazy(() =>
-  import('@/pages/saved-page').then((module) => ({
-    default: module.SavedPage,
-  }))
-);
-
-const LoginPage = lazy(() =>
-  import('@/pages/login-page').then((module) => ({ default: module.LoginPage }))
-);
-const RegisterPage = lazy(() =>
-  import('@/pages/register-page').then((module) => ({
-    default: module.RegisterPage,
-  }))
-);
+import { authRoutes, mainRoutes, pollsRoutes } from './routes';
 
 const authorizedRoutes: RouteObject[] = [
   {
     element: <AuthenticatedGuard />,
-    children: [
-      {
-        path: Routes.HOME,
-        element: <HomePage />,
-      },
-      {
-        path: Routes.MY_POLLS,
-        element: <div>My polls</div>,
-      },
-      {
-        path: Routes.SAVED,
-        element: <SavedPage />,
-      },
-      {
-        path: Routes.PROFILE,
-        element: <div>Profile</div>,
-      },
-    ].map((route) => ({
+    children: [...mainRoutes, ...pollsRoutes].map((route) => ({
       ...route,
       element: <LazyLoadingWrap>{route.element}</LazyLoadingWrap>,
     })),
@@ -54,16 +18,7 @@ const authorizedRoutes: RouteObject[] = [
 const unauthorizedRoutes: RouteObject[] = [
   {
     element: <UnauthenticatedGuard />,
-    children: [
-      {
-        path: Routes.LOGIN,
-        element: <LoginPage />,
-      },
-      {
-        path: Routes.REGISTER,
-        element: <RegisterPage />,
-      },
-    ].map((route) => ({
+    children: authRoutes.map((route) => ({
       ...route,
       element: <LazyLoadingWrap>{route.element}</LazyLoadingWrap>,
     })),

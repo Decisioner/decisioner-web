@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '@/core/hooks/use-auth';
-import { Routes } from '../routes';
+import { Routes } from '../routes/routes';
 
 const UnauthenticatedGuard = () => {
   const { isLoggedIn } = useAuth();
