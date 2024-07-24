@@ -1,6 +1,5 @@
 import React, { lazy } from 'react';
 import { RouteObject } from 'react-router-dom';
-import { Routes } from './routes';
 
 const CreatePollPage = lazy(() =>
   import('@/pages/create-poll').then((module) => ({
@@ -8,9 +7,23 @@ const CreatePollPage = lazy(() =>
   }))
 );
 
+export enum PollsRoutes {
+  POLL = '/polls/:id',
+  CREATE_POLL = '/polls/create',
+  UPDATE_POLL = '/polls/:id/update',
+}
+
 export const pollsRoutes: RouteObject[] = [
   {
-    path: Routes.CREATE_POLL,
+    path: PollsRoutes.POLL,
+    element: <h1>Poll</h1>,
+  },
+  {
+    path: PollsRoutes.CREATE_POLL,
     element: <CreatePollPage />,
+  },
+  {
+    path: PollsRoutes.UPDATE_POLL,
+    element: <h1>UpdatePoll</h1>,
   },
 ];

@@ -1,12 +1,9 @@
-export enum Routes {
-  HOME = '/',
-  MY_POLLS = '/polls/my',
-  CREATE_POLL = '/polls/create',
-  UPDATE_POLL = '/polls/:id/update',
-  POLL = '/polls/:id',
-  SAVED = '/saved',
-  PROFILE = '/profile',
+import { AuthRoutes } from './auth.routes';
+import { MainRoutes } from './main.routes';
+import { PollsRoutes } from './polls.routes';
 
-  LOGIN = '/auth/login',
-  REGISTER = '/auth/register',
-}
+export const Routes = {
+  ...MainRoutes,
+  ...AuthRoutes,
+  ...PollsRoutes,
+};
