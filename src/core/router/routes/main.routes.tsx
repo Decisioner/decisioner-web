@@ -1,5 +1,5 @@
 import React, { lazy } from 'react';
-import { RouteObject } from 'react-router-dom';
+import { createRouteObjectWithEnumPaths } from '../utils';
 
 const HomePage = lazy(() =>
   import('@/pages/home-page').then((module) => ({ default: module.HomePage }))
@@ -18,21 +18,17 @@ export enum MainRoutes {
   PROFILE = '/profile',
 }
 
-export const mainRoutes: RouteObject[] = [
-  {
-    path: MainRoutes.HOME,
+export const mainRoutes = createRouteObjectWithEnumPaths(MainRoutes, {
+  [MainRoutes.HOME]: {
     element: <HomePage />,
   },
-  {
-    path: MainRoutes.MY_POLLS,
+  [MainRoutes.MY_POLLS]: {
     element: <div>My polls</div>,
   },
-  {
-    path: MainRoutes.SAVED,
+  [MainRoutes.SAVED]: {
     element: <SavedPage />,
   },
-  {
-    path: MainRoutes.PROFILE,
+  [MainRoutes.PROFILE]: {
     element: <div>Profile</div>,
   },
-];
+});

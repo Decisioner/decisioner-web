@@ -1,5 +1,5 @@
 import React, { lazy } from 'react';
-import { RouteObject } from 'react-router-dom';
+import { createRouteObjectWithEnumPaths } from '../utils';
 
 const CreatePollPage = lazy(() =>
   import('@/pages/create-poll').then((module) => ({
@@ -13,17 +13,14 @@ export enum PollsRoutes {
   UPDATE_POLL = '/polls/:id/update',
 }
 
-export const pollsRoutes: RouteObject[] = [
-  {
-    path: PollsRoutes.POLL,
+export const pollsRoutes = createRouteObjectWithEnumPaths(PollsRoutes, {
+  [PollsRoutes.POLL]: {
     element: <h1>Poll</h1>,
   },
-  {
-    path: PollsRoutes.CREATE_POLL,
+  [PollsRoutes.CREATE_POLL]: {
     element: <CreatePollPage />,
   },
-  {
-    path: PollsRoutes.UPDATE_POLL,
+  [PollsRoutes.UPDATE_POLL]: {
     element: <h1>UpdatePoll</h1>,
   },
-];
+});

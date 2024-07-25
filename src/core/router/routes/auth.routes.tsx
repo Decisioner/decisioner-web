@@ -1,5 +1,5 @@
 import React, { lazy } from 'react';
-import { RouteObject } from 'react-router-dom';
+import { createRouteObjectWithEnumPaths } from '../utils';
 
 const LoginPage = lazy(() =>
   import('@/pages/login-page').then((module) => ({ default: module.LoginPage }))
@@ -15,13 +15,11 @@ export enum AuthRoutes {
   REGISTER = '/auth/register',
 }
 
-export const authRoutes: RouteObject[] = [
-  {
-    path: AuthRoutes.LOGIN,
+export const authRoutes = createRouteObjectWithEnumPaths(AuthRoutes, {
+  [AuthRoutes.LOGIN]: {
     element: <LoginPage />,
   },
-  {
-    path: AuthRoutes.REGISTER,
+  [AuthRoutes.REGISTER]: {
     element: <RegisterPage />,
   },
-];
+});
