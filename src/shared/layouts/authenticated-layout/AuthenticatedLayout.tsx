@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import { Grid, useMediaQuery, Theme } from '@mui/material';
-import { Sidebar } from './ui';
+import { Header, Sidebar } from './ui';
 import * as styles from './AuthenticatedLayout.styles';
 
 const AuthenticatedLayout = ({ children }: PropsWithChildren) => {
@@ -16,6 +16,7 @@ const AuthenticatedLayout = ({ children }: PropsWithChildren) => {
         </Grid>
       )}
       <Grid item md={10} xs={12}>
+        <Header />
         {children}
       </Grid>
     </Grid>

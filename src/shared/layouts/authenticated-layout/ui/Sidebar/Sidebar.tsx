@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Box, Grid, Typography } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { Button, ButtonColor } from '@/shared/ui';
 import { SidebarItem } from '../SidebarItem';
@@ -19,9 +19,14 @@ const Sidebar = () => {
 
   return (
     <Box sx={styles.sidebar}>
-      {navLinks.map((link) => (
-        <SidebarItem key={link.to} {...link} />
-      ))}
+      <Link to={Routes.HOME}>
+        <Typography variant="h2Medium">Decisioner</Typography>
+      </Link>
+      <Box sx={styles.nav}>
+        {navLinks.map((link) => (
+          <SidebarItem key={link.to} {...link} />
+        ))}
+      </Box>
       <Button
         color={ButtonColor.GREEN}
         onClick={handleCreatePoll}

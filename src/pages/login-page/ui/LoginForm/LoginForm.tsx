@@ -61,7 +61,10 @@ const LoginForm = () => {
       />
       <Button type="submit">Login</Button>
       <Typography variant="body1" color="gray.main">
-        Doesn&apos;t have an account? <Link to={Routes.REGISTER}>Register</Link>
+        Doesn&apos;t have an account?{' '}
+        <Link to={Routes.REGISTER} style={{ textDecoration: 'underline' }}>
+          Register
+        </Link>
       </Typography>
     </Box>
   );
