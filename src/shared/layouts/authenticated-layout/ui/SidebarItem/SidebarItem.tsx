@@ -10,7 +10,12 @@ import {
 
 import type { SidebarItemProps } from './SidebarItem.types';
 
-const SidebarItem = ({ icon, label, to }: SidebarItemProps) => {
+const SidebarItem = ({
+  icon,
+  label,
+  to,
+  isMobile = false,
+}: SidebarItemProps) => {
   const location = useLocation();
   const isActive = useMemo(
     () => location.pathname === to,
@@ -18,9 +23,26 @@ const SidebarItem = ({ icon, label, to }: SidebarItemProps) => {
   );
 
   return (
-    <ListItem disablePadding sx={{ display: 'block' }}>
+    <ListItem
+      disablePadding
+      sx={{
+        display: 'block',
+        borderRadius: 2,
+        overflow: 'hidden',
+        ...(isMobile && {
+          backgroundColor: isActive ? 'gray.light' : 'inherit',
+        }),
+      }}
+    >
       <Link to={to}>
-        <ListItemButton sx={{ gap: 1, borderRadius: 2 }}>
+        <ListItemButton
+          sx={{
+            gap: isMobile ? 3 : 1,
+            ...(isMobile && {
+              paddingBlock: 2,
+            }),
+          }}
+        >
           <ListItemIcon
             sx={{ color: isActive ? 'primary.main' : 'black', minWidth: 0 }}
           >

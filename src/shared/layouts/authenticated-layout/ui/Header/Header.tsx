@@ -1,40 +1,18 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useMediaQuery, Theme } from '@mui/material';
 
-import { Search } from '@mui/icons-material';
-import { Avatar, Box, TextField } from '@mui/material';
-
-import { Routes } from '@/core/router';
-import * as styles from './Header.styles';
+const HeaderDesktop = React.lazy(() => import('./HeaderDesktop'));
+const HeaderMobile = React.lazy(() => import('./HeaderMobile'));
 
 const Header = () => {
-  const navigate = useNavigate();
+  const isMobile = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down('md')
+  );
 
   return (
-    <Box sx={styles.header}>
-      <TextField
-        placeholder="Search"
-        fullWidth
-        sx={{
-          borderRadius: 2,
-          overflow: 'hidden',
-          '.MuiOutlinedInput-notchedOutline': {
-            border: 'none',
-          },
-        }}
-        InputProps={{
-          sx: {
-            backgroundColor: 'white.main',
-          },
-          startAdornment: (
-            <Box sx={{ mr: 1 }}>
-              <Search />
-            </Box>
-          ),
-        }}
-      />
-      <Avatar sx={styles.avatar} onClick={() => navigate(Routes.PROFILE)} />
-    </Box>
+    <React.Suspense fallback={null}>
+      {isMobile ? <HeaderMobile /> : <HeaderDesktop />}
+    </React.Suspense>
   );
 };
 
