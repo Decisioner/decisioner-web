@@ -88,7 +88,10 @@ const RegisterForm = () => {
       />
       <Button type="submit">Register</Button>
       <Typography variant="body1" color="gray.main">
-        Already have an account? <Link to={Routes.LOGIN}>Log in</Link>
+        Already have an account?{' '}
+        <Link to={Routes.LOGIN} style={{ textDecoration: 'underline' }}>
+          Log in
+        </Link>
       </Typography>
     </Box>
   );

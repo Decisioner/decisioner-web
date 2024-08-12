@@ -1,7 +1,8 @@
 import React from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '@/core/hooks/use-auth';
-import { Routes } from '../routes';
+import { Routes } from '../routes/routes';
+import { AuthenticatedLayout } from '@/shared/layouts';
 
 const AuthenticatedGuard = () => {
   const { isLoggedIn } = useAuth();
@@ -12,7 +13,11 @@ const AuthenticatedGuard = () => {
     return <Navigate to={Routes.LOGIN} state={{ from: location }} replace />;
   }
 
-  return <Outlet />;
+  return (
+    <AuthenticatedLayout>
+      <Outlet />
+    </AuthenticatedLayout>
+  );
 };
 
 export default AuthenticatedGuard;

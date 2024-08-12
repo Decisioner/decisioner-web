@@ -1,51 +1,31 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
 
-import { Routes } from './routes';
-import { AuthenticatedGuard, UnauthenticatedGuard } from './guards';
 import LazyLoadingWrap from '@/shared/ui/LazyLoadingWrapper';
-
-const HomePage = lazy(() =>
-  import('@/pages/home-page').then((module) => ({ default: module.HomePage }))
-);
-
-const LoginPage = lazy(() =>
-  import('@/pages/login-page').then((module) => ({ default: module.LoginPage }))
-);
-const RegisterPage = lazy(() =>
-  import('@/pages/register-page').then((module) => ({
-    default: module.RegisterPage,
-  }))
-);
+import { AuthenticatedGuard, UnauthenticatedGuard } from './guards';
+import { transformToArray } from './utils';
+import { Routes, authRoutes, mainRoutes, pollsRoutes } from './routes';
+import { RouteObjectWithEnumPaths } from './types';
 
 const authorizedRoutes: RouteObject[] = [
   {
     element: <AuthenticatedGuard />,
-    children: [
-      {
-        path: Routes.HOME,
-        element: <HomePage />,
-      },
-    ].map((route) => ({
-      ...route,
-      element: <LazyLoadingWrap>{route.element}</LazyLoadingWrap>,
-    })),
+    children: [mainRoutes, pollsRoutes]
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .flatMap((routeObject: RouteObjectWithEnumPaths<any>) =>
+        transformToArray<keyof typeof Routes>(routeObject)
+      )
+      .map((route) => ({
+        ...route,
+        element: <LazyLoadingWrap>{route.element}</LazyLoadingWrap>,
+      })),
   },
 ];
 
 const unauthorizedRoutes: RouteObject[] = [
   {
     element: <UnauthenticatedGuard />,
-    children: [
-      {
-        path: Routes.LOGIN,
-        element: <LoginPage />,
-      },
-      {
-        path: Routes.REGISTER,
-        element: <RegisterPage />,
-      },
-    ].map((route) => ({
+    children: transformToArray(authRoutes).map((route) => ({
       ...route,
       element: <LazyLoadingWrap>{route.element}</LazyLoadingWrap>,
     })),
