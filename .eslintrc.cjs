@@ -13,7 +13,13 @@ module.exports = {
     'prettier',
     'plugin:storybook/recommended',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs', 'vite.config.ts'],
+  ignorePatterns: [
+    'dist',
+    '.eslintrc.cjs',
+    'vite.config.ts',
+    'cypress/**',
+    'cypress.config.ts',
+  ],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh', 'react', '@typescript-eslint', 'prettier'],
   rules: {

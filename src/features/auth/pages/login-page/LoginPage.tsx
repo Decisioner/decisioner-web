@@ -1,6 +1,6 @@
 import React from 'react';
 import { UnauthenticatedLayout } from '@/shared/layouts';
-import { LoginForm } from './ui';
+import { LoginForm } from './LoginForm';
 
 const LoginPage = () => {
   return (

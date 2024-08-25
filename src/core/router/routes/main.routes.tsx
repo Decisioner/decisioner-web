@@ -2,11 +2,13 @@ import React, { lazy } from 'react';
 import { createRouteObjectWithEnumPaths } from '../utils';
 
 const HomePage = lazy(() =>
-  import('@/pages/home-page').then((module) => ({ default: module.HomePage }))
+  import('@/features/poll/pages').then((module) => ({
+    default: module.HomePage,
+  }))
 );
 
 const SavedPage = lazy(() =>
-  import('@/pages/saved-page').then((module) => ({
+  import('@/features/poll/pages').then((module) => ({
     default: module.SavedPage,
   }))
 );

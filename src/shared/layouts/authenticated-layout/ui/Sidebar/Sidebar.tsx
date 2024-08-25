@@ -8,7 +8,7 @@ import { SidebarItem } from '../SidebarItem';
 import { Routes } from '@/core/router';
 import { navLinks } from '../../constants';
 
-import { AuthService } from '@/core/api/auth';
+import { StorageUtil } from '@/shared/utils';
 import { useAuth } from '@/core/hooks/use-auth';
 
 import * as styles from './Sidebar.styles';
@@ -25,7 +25,7 @@ const Sidebar = () => {
   };
 
   const handleLogout = async () => {
-    await AuthService.logout();
+    await StorageUtil.removeToken();
     await update();
     navigate(0);
   };

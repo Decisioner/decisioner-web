@@ -2,16 +2,15 @@ import React, { PropsWithChildren, useContext, useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import { User } from '@/core/models';
+import { getMe } from '@/features/auth/api';
 import { StorageUtil } from '@/shared/utils';
 import { AuthContextProps } from '../types';
-import { AuthService } from '@/core/api/auth';
 
 const AuthContext = React.createContext<AuthContextProps>({
   update: () => new Promise(() => {}),
   user: {} as User,
 });
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const useAuthContext = (): AuthContextProps => useContext(AuthContext);
 
 const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
@@ -19,7 +18,7 @@ const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const { error, isFetching, isFetched, isError, data, refetch } = useQuery({
     queryKey: ['oauth', token],
-    queryFn: () => AuthService.getMe(),
+    queryFn: () => getMe(),
     refetchOnWindowFocus: false,
     retry: false,
   });

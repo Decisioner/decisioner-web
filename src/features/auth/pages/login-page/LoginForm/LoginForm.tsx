@@ -1,16 +1,17 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Controller, DefaultValues, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Box, Typography } from '@mui/material';
 import { Button, TextField } from '@/shared/ui';
 
-import { LoginRequest, LoginRequestSchema, AuthService } from '@/core/api/auth';
+import { LoginRequest, LoginRequestSchema } from '@/features/auth/models';
+import { useLoginMutation } from '@/features/auth/requests';
+
 import { Routes } from '@/core/router';
 
 import * as styles from './LoginForm.styles';
-import { useAuth } from '@/core/hooks/use-auth';
 
 const loginFormDefaultValues: DefaultValues<LoginRequest> = {
   username: '',
@@ -18,8 +19,7 @@ const loginFormDefaultValues: DefaultValues<LoginRequest> = {
 };
 
 const LoginForm = () => {
-  const { update } = useAuth();
-  const navigate = useNavigate();
+  const loginMutation = useLoginMutation();
 
   const loginForm = useForm<LoginRequest>({
     defaultValues: loginFormDefaultValues,
@@ -27,9 +27,8 @@ const LoginForm = () => {
   });
 
   const handleSubmit = loginForm.handleSubmit(async (data) => {
-    await AuthService.login(data);
-    await update();
-    navigate(Routes.HOME);
+    loginForm.clearErrors('root');
+    loginMutation.mutate(data);
   });
 
   return (
