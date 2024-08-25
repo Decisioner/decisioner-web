@@ -2,7 +2,9 @@ import React, { lazy } from 'react';
 import { createRouteObjectWithEnumPaths } from '../utils';
 
 const LoginPage = lazy(() =>
-  import('@/pages/login-page').then((module) => ({ default: module.LoginPage }))
+  import('@/features/auth/pages').then((module) => ({
+    default: module.LoginPage,
+  }))
 );
 const RegisterPage = lazy(() =>
   import('@/pages/register-page').then((module) => ({
