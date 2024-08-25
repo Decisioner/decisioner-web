@@ -2,7 +2,7 @@ import React, { lazy } from 'react';
 import { createRouteObjectWithEnumPaths } from '../utils';
 
 const CreatePollPage = lazy(() =>
-  import('@/pages/create-poll').then((module) => ({
+  import('@/features/poll/pages').then((module) => ({
     default: module.CreatePollPage,
   }))
 );
