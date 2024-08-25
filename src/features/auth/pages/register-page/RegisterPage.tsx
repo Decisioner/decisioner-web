@@ -1,6 +1,6 @@
 import React from 'react';
 import { UnauthenticatedLayout } from '@/shared/layouts';
-import { RegisterForm } from './ui';
+import { RegisterForm } from './RegisterForm';
 
 const RegisterPage = () => {
   return (

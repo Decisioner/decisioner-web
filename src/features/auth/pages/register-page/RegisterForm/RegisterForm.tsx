@@ -1,16 +1,14 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Controller, DefaultValues, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Box, Typography } from '@mui/material';
 import { Button, TextField } from '@/shared/ui';
 
-import {
-  AuthService,
-  RegisterRequest,
-  RegisterRequestSchema,
-} from '@/core/api/auth';
+import { RegisterRequest, RegisterRequestSchema } from '@/features/auth/models';
+import { useRegisterMutation } from '@/features/auth/requests';
+
 import { Routes } from '@/core/router';
 
 import * as styles from './RegisterForm.styles';
@@ -23,7 +21,7 @@ const registerFormDefaultValues: DefaultValues<RegisterRequest> = {
 };
 
 const RegisterForm = () => {
-  const navigate = useNavigate();
+  const registerMutation = useRegisterMutation();
 
   const registerForm = useForm<RegisterRequest>({
     defaultValues: registerFormDefaultValues,
@@ -31,8 +29,8 @@ const RegisterForm = () => {
   });
 
   const handleSubmit = registerForm.handleSubmit(async (data) => {
-    await AuthService.register(data);
-    navigate(Routes.LOGIN);
+    registerForm.clearErrors('root');
+    registerMutation.mutate(data);
   });
 
   return (

@@ -7,7 +7,7 @@ const LoginPage = lazy(() =>
   }))
 );
 const RegisterPage = lazy(() =>
-  import('@/pages/register-page').then((module) => ({
+  import('@/features/auth/pages').then((module) => ({
     default: module.RegisterPage,
   }))
 );
