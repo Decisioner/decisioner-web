@@ -11,7 +11,6 @@ const AuthContext = React.createContext<AuthContextProps>({
   user: {} as User,
 });
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const useAuthContext = (): AuthContextProps => useContext(AuthContext);
 
 const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {

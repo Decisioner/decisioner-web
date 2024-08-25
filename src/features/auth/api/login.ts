@@ -1,4 +1,4 @@
-import { apiClient } from '@/core/config/api';
+import { apiClient } from '@/core/config';
 import { Token } from '@/core/models';
 import { LoginRequest } from '../models';
 
